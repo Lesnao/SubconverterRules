@@ -1,0 +1,38 @@
+ipv6: true
+geodata-mode: true
+geodata-loader: standard
+tcp-concurrent: true
+unified-delay: true
+keep-alive-interval: 1800
+dns:
+  enable: true
+  ipv6: true
+  enhanced-mode: redir-host
+  listen: 0.0.0.0:53
+  nameserver:
+  - quic://dns.alidns.com
+  - https://doh.pub/dns-query
+  fallback:
+  - https://dns.google/dns-query
+  - https://dns.quad9.net/dns-query
+  default-nameserver:
+  - 223.5.5.5
+  - 119.29.29.29
+  proxy-server-nameserver:
+  - 223.5.5.5
+  - 119.29.29.29
+sniffer:
+  enable: true
+  force-dns-mapping: true
+  parse-pure-ip: true
+tun:
+  enable: true
+  stack: system
+  device: utun
+  auto-route: false
+  auto-detect-interface: false
+  dns-hijack:
+  - tcp://any:53
+profile:
+  store-selected: true
+  store-fake-ip: true
