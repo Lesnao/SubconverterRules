@@ -3,7 +3,7 @@ geodata-mode: true
 geodata-loader: standard
 tcp-concurrent: true
 unified-delay: true
-keep-alive-interval: 1800
+keep-alive-interval: 30
 dns:
   enable: true
   ipv6: false
