@@ -125,6 +125,7 @@ dns:
     - +.nflxvideo.net
     - "*.square-enix.com"
     - "*.finalfantasyxiv.com"
+    - geosite:cn
 sniffer:
   enable: true
   force-dns-mapping: true
