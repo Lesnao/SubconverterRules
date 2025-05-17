@@ -6,7 +6,7 @@ unified-delay: true
 keep-alive-interval: 30
 dns:
   enable: true
-  ipv6: false
+  ipv6: true
   enhanced-mode: redir-host
   listen: 0.0.0.0:53
   nameserver:
