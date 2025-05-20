@@ -6,7 +6,6 @@ unified-delay: true
 keep-alive-interval: 30
 find-process-mode: strict
 global-client-fingerprint: chrome
-geodata-loader: standard
 profile:
   store-selected: true
   store-fake-ip: true
