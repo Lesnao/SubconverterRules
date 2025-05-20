@@ -15,11 +15,15 @@ dns:
   enhanced-mode: redir-host
   listen: 0.0.0.0:53
   nameserver:
-   - 'https://dns.alidns.com/dns-query#h3=true'
-   - 'https://doh.pub/dns-query'
+    - "https://dns.alidns.com/dns-query#h3=true"
+    - "https://doh.pub/dns-query"
   fallback:
-   - "https://8.8.8.8/dns-query#\U0001F680 节点选择"
-   - "https://208.67.220.220/dns-query#\U0001F680 节点选择"
+    - "https://8.8.8.8/dns-query#\U0001F680 节点选择"
+    - "https://208.67.220.220/dns-query#\U0001F680 节点选择"
+  nameserver-policy:
+    "geosite:cn,private":
+      - https://doh.pub/dns-query
+      - https://dns.alidns.com/dns-query
   fallback-filter:
     geoip: true
     geoip-code: CN
@@ -28,12 +32,12 @@ dns:
     ipcidr:
       - 240.0.0.0/4
     domain:
-      - '+.google.com'
-      - '+.facebook.com'
-      - '+.youtube.com'
+      - "+.google.com"
+      - "+.facebook.com"
+      - "+.youtube.com"
   default-nameserver:
-   - 223.5.5.5
-   - 119.29.29.29
+    - 223.5.5.5
+    - 119.29.29.29
 sniffer:
   enable: true
   force-dns-mapping: true
@@ -55,4 +59,4 @@ tun:
   strict-route: true
   auto-redirect: false
   dns-hijack:
-   - tcp://any:53
+    - tcp://any:53
