@@ -29,16 +29,16 @@ dns:
       - "https://dns.alidns.com/dns-query#h3=true"
       - https://doh.pub/dns-query
     "geosite:gfw":
-      - https://8.8.8.8/dns-query
-      - https://1.1.1.1/dns-query
-      - https://208.67.222.222/dns-query
+      - "https://8.8.8.8/dns-query#\U0001F680 节点选择"
+      - "https://1.1.1.1/dns-query#\U0001F680 节点选择"
+      - "https://208.67.222.222/dns-query#\U0001F680 节点选择"
   nameserver:
     - "https://dns.alidns.com/dns-query#h3=true"
     - https://doh.pub/dns-query
   fallback:
-    - https://8.8.8.8/dns-query
-    - https://1.1.1.1/dns-query
-    - https://208.67.222.222/dns-query
+    - "https://8.8.8.8/dns-query#\U0001F680 节点选择"
+    - "https://1.1.1.1/dns-query#\U0001F680 节点选择"
+    - "https://208.67.222.222/dns-query#\U0001F680 节点选择"
   fallback-filter:
     geoip: true
     geoip-code: CN
