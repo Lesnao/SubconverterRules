@@ -30,13 +30,13 @@ dns:
       - "https://doh.pub/dns-query"
     "geosite:gfw":
       - "https://dns.google/dns-query#\U0001F680 节点选择"
-      - "https://dns.quad9.net/dns-query#\U0001F680 节点选择"
+      - "https://dns11.quad9.net/dns-query#\U0001F680 节点选择"
   nameserver:
     - "https://dns.alidns.com/dns-query#h3=true"
     - "https://doh.pub/dns-query"
   fallback:
     - "https://dns.google/dns-query#\U0001F680 节点选择"
-    - "https://dns.quad9.net/dns-query#\U0001F680 节点选择"
+    - "https://dns11.quad9.net/dns-query#\U0001F680 节点选择"
   fallback-filter:
     geoip: true
     geoip-code: CN
