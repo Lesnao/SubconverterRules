@@ -25,19 +25,23 @@ dns:
   enhanced-mode: redir-host
   listen: 0.0.0.0:53
   nameserver-policy:
-    "geosite:cn,private":
+    "geosite:private,onedrive,microsoft@cn,apple,category-games@cn,cn":
       - "https://dns.alidns.com/dns-query#h3=true"
       - "https://doh.pub/dns-query"
+      - "https://doh.360.cn/dns-query"
     "geosite:gfw":
-      - "https://dns.google/dns-query#\U0001F680 节点选择&disable-ipv6"
-      - "https://dns11.quad9.net/dns-query#\U0001F680 节点选择&disable-ipv6"
+      - "https://dns.google/dns-query#\U0001F680 节点选择&disable-ipv6=true"
+      - "https://dns11.quad9.net/dns-query#\U0001F680 节点选择&disable-ipv6=true"
+  default-nameserver:
+    - 223.5.5.5
+    - 119.29.29.29
   nameserver:
     - "https://dns.alidns.com/dns-query#h3=true"
     - "https://doh.pub/dns-query"
     - "https://doh.360.cn/dns-query"
   fallback:
-    - "https://dns.google/dns-query#\U0001F680 节点选择&disable-ipv6"
-    - "https://dns11.quad9.net/dns-query#\U0001F680 节点选择&disable-ipv6"
+    - "https://dns.google/dns-query#\U0001F680 节点选择&disable-ipv6=true"
+    - "https://dns11.quad9.net/dns-query#\U0001F680 节点选择&disable-ipv6=true"
   fallback-filter:
     geoip: true
     geoip-code: CN
@@ -49,9 +53,7 @@ dns:
       - "+.google.com"
       - "+.facebook.com"
       - "+.youtube.com"
-  default-nameserver:
-    - 223.5.5.5
-    - 119.29.29.29
+
 sniffer:
   enable: true
   force-dns-mapping: true
