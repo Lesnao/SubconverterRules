@@ -1,2 +1,5 @@
 # 自定义直连
+# steam服务器查询
 DOMAIN-SUFFIX, steamserver.net
+# cloudflare隧道
+DOMAIN-SUFFIX, argotunnel.com
