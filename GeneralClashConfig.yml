@@ -1,58 +1,77 @@
 ipv6: false
+mode: rule
+tcp-concurrent: true
+unified-delay: true
+find-process-mode: strict
+global-client-fingerprint: chrome
 
+log-level: info
+keep-alive-interval: 15
+keep-alive-idle: 600
+
+profile:
+  store-selected: true
+  store-fake-ip: true
+
+experimental:
+  quic-go-disable-gso: false
+  quic-go-disable-ecn: false
+  dialer-ip4p-convert: false
+
+external-ui-url: "https://github.com/MetaCubeX/metacubexd/archive/refs/heads/gh-pages.zip"
 geodata-mode: true
 geodata-loader: standard
 geo-auto-update: true
+geo-update-interval: 24
 geox-url:
   geoip: "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geoip.dat"
   geosite: "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geosite.dat"
   mmdb: "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/country.mmdb"
   asn: "https://github.com/xishang0128/geoip/releases/download/latest/GeoLite2-ASN.mmdb"
-tcp-concurrent: true
-unified-delay: true
-keep-alive-interval: 30
-find-process-mode: strict
-global-client-fingerprint: chrome
-mode: rule
-log-level: info
-external-ui-url: "https://github.com/MetaCubeX/metacubexd/archive/refs/heads/gh-pages.zip"
-profile:
-  store-selected: true
-  store-fake-ip: true
-dns:
+
+tun:
+  device: utun
   enable: true
-  ipv6: true
-  enhanced-mode: redir-host
-  listen: 0.0.0.0:53
-  nameserver-policy:
-    "geosite:private,onedrive,microsoft@cn,apple,category-games@cn,cn":
-      - "https://dns.alidns.com/dns-query#h3=true"
-      - "https://doh.pub/dns-query"
-      - "https://doh.360.cn/dns-query"
-    "geosite:gfw":
-      - "https://dns.google/dns-query#\U0001F680 节点选择&disable-ipv6=true"
-      - "https://dns11.quad9.net/dns-query#\U0001F680 节点选择&disable-ipv6=true"
-  default-nameserver:
-    - 223.5.5.5
-    - 119.29.29.29
-  nameserver:
-    - "https://dns.alidns.com/dns-query#h3=true"
-    - "https://doh.pub/dns-query"
-    - "https://doh.360.cn/dns-query"
-  fallback:
-    - "https://dns.google/dns-query#\U0001F680 节点选择&disable-ipv6=true"
-    - "https://dns11.quad9.net/dns-query#\U0001F680 节点选择&disable-ipv6=true"
-  fallback-filter:
-    geoip: true
-    geoip-code: CN
-    geosite:
-      - gfw
-    ipcidr:
-      - 240.0.0.0/4
-    domain:
-      - "+.google.com"
-      - "+.facebook.com"
-      - "+.youtube.com"
+  stack: mixed
+  auto-route: true
+  auto-redirect: true
+  auto-detect-interface: true
+  strict-route: true
+  gso: false
+  gso-max-size: 65536
+  udp-timeout: 300
+  endpoint-independent-nat: false
+  disable-icmp-forwarding: true
+  dns-hijack:
+    - any:53
+    - tcp://any:53
+  route-exclude-address:
+    # 绕过 Apple 推送通知服务（参考：https://support.apple.com/zh-cn/102266）
+    - 17.249.0.0/16
+    - 17.252.0.0/16
+    - 17.57.144.0/22
+    - 17.188.128.0/18
+    - 17.188.20.0/23
+    # 绕过私有IP
+    - 0.0.0.0/8
+    - 10.0.0.0/8
+    - 100.64.0.0/10
+    - 127.0.0.0/8
+    - 169.254.0.0/16
+    - 172.16.0.0/12
+    - 192.0.0.0/24
+    - 192.0.2.0/24
+    - 192.88.99.0/24
+    - 192.168.0.0/16
+    # Fake-IP
+    #- 198.18.0.0/15
+    - 198.51.100.0/24
+    - 203.0.113.0/24
+    #- 224.0.0.0/3
+    #- ::/127
+    #- fc00::/7
+    #- fe80::/10
+    #- ff00::/8
 
 sniffer:
   enable: true
@@ -63,16 +82,65 @@ sniffer:
     HTTP:
       ports: [80, 8080-8880]
     TLS:
-      ports: [443, 5228, 8443]
+      ports: [443, 8443]
     QUIC:
       ports: [443, 8443]
-tun:
+  skip-domain:
+    - "*"
+    - "geosite:private"
+    - "geosite:cn"
+    - "Mijia Cloud"
+    - "+.push.apple.com"
+    - "dlg.io.mi.com"
+    - "+.oray.com"
+    - "+.sunlogin.net"
+
+dns:
   enable: true
-  stack: mixed
-  device: utun
-  auto-route: true
-  auto-redirect: true
-  auto-detect-interface: true
-  strict-route: true
-  dns-hijack:
-    - tcp://any:53
+  ipv6: true
+  enhanced-mode: redir-host
+  cache-algorithm: arc
+  prefer-h3: false
+  use-hosts: true
+  listen: 0.0.0.0:7874
+  respect-rules: false
+  default-nameserver:
+    - "https://223.5.5.5/dns-query#h3=true"
+    - "https://223.6.6.6/dns-query#h3=true"
+
+  proxy-server-nameserver:
+    - "https://dns.alidns.com/dns-query#h3=true"
+    - "https://doh.pub/dns-query"
+
+  nameserver:
+    - "https://dns.alidns.com/dns-query#h3=true"
+    - "https://doh.pub/dns-query"
+    - "https://doh.360.cn/dns-query"
+
+  fallback:
+    - "https://dns.google/dns-query#\U0001F680 节点选择&disable-ipv6=true"
+    - "https://dns11.quad9.net/dns-query#\U0001F680 节点选择&disable-ipv6=true"
+  fallback-filter:
+    geoip: true
+    geoip-code: cn
+    geosite:
+      - gfw
+    ipcidr:
+      - 0.0.0.0/8
+      - 10.0.0.0/8
+      - 100.64.0.0/10
+      - 127.0.0.0/8
+      - 169.254.0.0/16
+      - 172.16.0.0/12
+      - 192.0.0.0/24
+      - 192.0.2.0/24
+      - 192.88.99.0/24
+      - 192.168.0.0/16
+      - 198.18.0.0/15
+      - 198.51.100.0/24
+      - 203.0.113.0/24
+      - 224.0.0.0/3
+      - ::/127
+      - fc00::/7
+      - fe80::/10
+      - ff00::/8
