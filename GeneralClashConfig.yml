@@ -118,8 +118,7 @@ dns:
     - "https://doh.pub/dns-query"
     - "https://doh.360.cn/dns-query"
   # 批配到直接
-  nameserver-policy:
-    "geosite:cn,private,category-games@cn,category-game-platforms-download,category-public-tracker":
+  direct-nameserver:
     - "https://dns.alidns.com/dns-query#h3=true"
     - "https://doh.pub/dns-query"
     - "https://doh.360.cn/dns-query"
