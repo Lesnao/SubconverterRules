@@ -114,7 +114,15 @@ dns:
     - "https://doh.pub/dns-query"
   # 直连dns
   nameserver:
-    - "https://dns.alidns.com/dns-query#h3=true"
+    - "https://223.5.5.5/dns-query#h3=true"
+    - "https://223.6.6.6/dns-query#h3=true"
+    - "https://doh.pub/dns-query"
+    - "https://doh.360.cn/dns-query"
+  # 批配到直接
+  nameserver-policy:
+    "geosite:cn,private":
+    - "https://223.5.5.5/dns-query#h3=true"
+    - "https://223.6.6.6/dns-query#h3=true"
     - "https://doh.pub/dns-query"
     - "https://doh.360.cn/dns-query"
   # 远程dns
@@ -123,7 +131,9 @@ dns:
     - "https://dns11.quad9.net/dns-query#\U0001F680 节点选择&disable-ipv6=true"
   fallback-filter:
     geoip: true
+    # 如果ip在里面的话就会采用nameserver，否则fallback
     geoip-code: cn
+    # 批配到就只用fallback
     geosite:
       - gfw
     ipcidr:
