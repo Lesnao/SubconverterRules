@@ -1,9 +1,8 @@
-ipv6: false
+ipv6: true
 mode: rule
 tcp-concurrent: true
 unified-delay: true
 find-process-mode: strict
-global-client-fingerprint: chrome
 
 log-level: info
 keep-alive-interval: 15
